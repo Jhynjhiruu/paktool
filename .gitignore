@@ -1,0 +1,7 @@
+/build
+
+.clangd
+
+*.z64
+*.pak
+*.bak
