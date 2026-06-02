@@ -9,7 +9,7 @@ N64_ROM_REGIONFREE = true
 
 OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/menu.o $(BUILD_DIR)/read.o $(BUILD_DIR)/rw.o $(BUILD_DIR)/write.o
 
-N64_CFLAGS += -std=gnu23 -Os -DNDEBUG
+N64_CFLAGS += -std=gnu23
 
 paktool.z64: N64_ROM_TITLE = "Controller pak tool"
 

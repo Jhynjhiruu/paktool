@@ -22,28 +22,37 @@ int main(void) {
 
     joypad_init();
 
-    info(NAME "\n");
-
-    if (!debug_init_sdfs("sd:/", -1)) {
+    if (!debug_init(DEBUG_FEATURE_FILE_SD)) {
         error("SD card not found\n");
 
         INFLOOP;
     }
 
-    switch (joypad_get_accessory_type(JOYPAD_PORT_1)) {
-        case JOYPAD_ACCESSORY_TYPE_CONTROLLER_PAK: {
-            info("Found controller pak\n");
-        } break;
+    bool found = false;
+    while (!found) {
+        console_clear();
 
-        case JOYPAD_ACCESSORY_TYPE_NONE: {
-            error("No accessory in controller port 1\n");
-             INFLOOP;
-        } break;
+        printf(NAME "\n");
 
-        default: {
-            error("Wrong accessory in controller port 1\n");
-             INFLOOP;
-        } break;
+        joypad_poll();
+
+        switch (joypad_get_accessory_type(JOYPAD_PORT_1)) {
+            case JOYPAD_ACCESSORY_TYPE_CONTROLLER_PAK: {
+                printf("Found controller pak\n");
+                console_render();
+                found = true;
+            } break;
+
+            case JOYPAD_ACCESSORY_TYPE_NONE: {
+                printf("No accessory in controller port 1\n");
+                console_render();
+            } break;
+
+            default: {
+                printf("Wrong accessory in controller port 1\n");
+                console_render();
+            } break;
+        }
     }
 
     errno = 0;

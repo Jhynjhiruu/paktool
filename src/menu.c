@@ -2,8 +2,6 @@
 
 #include "menu.h"
 
-#include "util.h"
-
 static void __render(menu_opt_t const* entries, size_t num_entries, char const * header, size_t index) {
     console_clear();
     printf("%s", header);
@@ -26,11 +24,7 @@ int __render_menu(menu_opt_t const* entries, char const * header, size_t index) 
         continue;
     }
 
-    if (num_entries == 0) {
-        error("No menu entries\n");
-
-        INFLOOP;
-    }
+    assertf(num_entries != 0, "No menu entries\n");
 
 #define RISE(inp) ((cur.inp) && !(prev.inp))
 #define UP() (RISE(btn.d_up) || RISE(stick_y >= 40))

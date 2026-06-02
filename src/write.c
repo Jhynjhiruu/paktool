@@ -106,4 +106,6 @@ void pak_write(unsigned int banks, unsigned int filesystem_banks) {
         error("Failed to close " WRITE_PATH ": %s (%d)\n", strerror(errno), errno);
         // not fatal
     }
+
+    info("Done!\n");
 }

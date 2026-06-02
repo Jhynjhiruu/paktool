@@ -63,10 +63,11 @@ void pak_read(unsigned int banks, unsigned int filesystem_banks) {
         INFLOOP;
     }
 
-    if (ftruncate(f, (off_t)(banks_to_dump * BANK_SIZE)) < 0) {
+    // turns out sdfs doesn't support this lmao
+    /*if (ftruncate(f, (off_t)(banks_to_dump * BANK_SIZE)) < 0) {
         error("Failed to set output file size: %s (%d)\n", strerror(errno), errno);
         // not fatal, but certainly fishy
-    }
+    }*/
 
     uint8_t buf[BANK_SIZE];
 
